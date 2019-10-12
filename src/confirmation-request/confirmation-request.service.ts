@@ -14,7 +14,7 @@ export class ConfirmationRequestService {
   }
 
   getConfirmationRequestsToReview(): any[] {
-    return this.confirmationRequests.filter((request) => { return request.confirmed === true });
+    return this.confirmationRequests.filter((request) => { return request.confirmed === '' });
   }
 
   createConfirmationRequest(data): void {
@@ -34,7 +34,7 @@ export class ConfirmationRequestService {
     const { confirmationRequestId, accepted } = data;
     const request = this.getConfirmationRequestById(confirmationRequestId);
     if (request) {
-      request.confirmed = accepted;
+      request.confirmed = accepted ? 'accepted' : 'declined';
     }
   }
 }

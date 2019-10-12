@@ -2,7 +2,7 @@ export class ConfirmationRequest {
   id: string;
   userId: string;
   eventId: string;
-  confirmed: boolean = false;
+  confirmed: string = '';
   confirmationImage: string = null;
 
   constructor(userId: string,
