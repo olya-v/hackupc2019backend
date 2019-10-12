@@ -1,15 +1,14 @@
-export class UserModel {
+export class User {
     username: string;
-    id: number;
+    id: string;
     isModerator: boolean;
     coins: number;
 
     constructor(username: string,
-                id: number,
                 isModerator: boolean,
                 coins: number) {
         this.username = username;
-        this.id = id;
+        this.id = Math.random().toString(36).substring(2, 15) + Math.random().toString(36).substring(2, 15);
         this.isModerator = isModerator;
         this.coins = coins;
     }
@@ -22,11 +21,11 @@ export class UserModel {
         this.username = username;
     }
 
-    getUserId(): number {
+    getId(): string {
         return this.id;
     }
 
-    setUserId(id: number) {
+    setId(id: string) {
         this.id = id;
     }
 

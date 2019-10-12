@@ -35,7 +35,7 @@ export class EventService {
           event.image,
           event.creator,
           event.location,
-          []
+          [],
       );
       this.eventMap.set(uuid, newEvent);
     }
