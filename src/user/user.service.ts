@@ -5,21 +5,19 @@ import {User} from './user.model';
 export class UserService {
     user1 = new User('moderator',
         true,
-        50);
+        50,
+        '');
 
     user2 = new User('average',
         false,
-        50);
+        50,
+        '');
 
     users = [this.user1, this.user2];
 
-    getUsers(): any[] {
-        return this.users;
-    }
-
     userMap: Map<string, User> = new Map();
 
-    getUser(): any[] {
+    getUsers(): any[] {
         return Array.from(this.userMap.entries());
     }
 
@@ -28,7 +26,11 @@ export class UserService {
             user.username,
             user.isModerator,
             user.coins,
+            user.icon,
         );
+        while (this.userMap.has(newUser.getId())) {
+            newUser.setId();
+        }
         this.userMap.set(newUser.getId(), newUser);
     }
 }
