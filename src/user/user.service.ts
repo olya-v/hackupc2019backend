@@ -17,6 +17,10 @@ export class UserService {
 
     userMap: Map<string, User> = new Map();
 
+    getUser(userId: string): User {
+        return this.userMap.get(userId);
+    }
+
     getUsers(): any[] {
         return Array.from(this.userMap.entries());
     }
@@ -33,4 +37,6 @@ export class UserService {
         }
         this.userMap.set(newUser.getId(), newUser);
     }
+
+
 }

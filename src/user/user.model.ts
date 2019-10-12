@@ -4,6 +4,7 @@ export class User {
     isModerator: boolean;
     coins: number;
     icon: string = '';
+    userEvents: string[] = new Array<string>();
 
     constructor(username: string,
                 isModerator: boolean,
@@ -54,5 +55,11 @@ export class User {
 
     setIcon(icon: string) {
         this.icon = icon;
+    }
+
+    addEvent(eventId: string) {
+        if (!this.userEvents.includes(eventId)) {
+            this.userEvents.push(eventId);
+        }
     }
 }
