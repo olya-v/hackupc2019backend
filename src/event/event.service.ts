@@ -4,7 +4,6 @@ import { Event } from './event.model';
 @Injectable()
 export class EventService {
     fakeEvent = new Event(
-        Math.random().toString(36).substring(2, 15) + Math.random().toString(36).substring(2, 15),
       'park aufräumen',
       1,
       20,
@@ -25,9 +24,7 @@ export class EventService {
     }
 
     createEvent(event) {
-      const uuid = Math.random().toString(36).substring(2, 15) + Math.random().toString(36).substring(2, 15);
       const newEvent = new Event(
-          uuid,
           event.title,
           event.estimatedWorkHours,
           event.coins,
@@ -37,7 +34,10 @@ export class EventService {
           event.location,
           [],
       );
-      this.eventMap.set(uuid, newEvent);
+      while (this.eventMap.has(newEvent.id)) {
+        newEvent.setId();
+      }
+      this.eventMap.set(newEvent.id, newEvent);
     }
 
     deleteEvent(data) {
