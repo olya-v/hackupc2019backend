@@ -11,8 +11,7 @@ export class Event {
   completed: boolean = false;
   completionImage: string = '';
 
-  constructor(id: string,
-              title: string,
+  constructor(title: string,
               estimatedWorkHours: number,
               coins: number,
               utcTimestamp: number,
@@ -20,7 +19,7 @@ export class Event {
               creator: number,
               location: object,
               participantIds: object[]) {
-    this.id = id;
+    this.setId();
     this.title = title;
     this.estimatedWorkHours = estimatedWorkHours;
     this.coins = coins;
@@ -29,5 +28,9 @@ export class Event {
     this.creator = creator;
     this.location = location;
     this.participantIds = participantIds;
+  }
+
+  setId() {
+    this.id = Math.random().toString(36).substring(2, 15) + Math.random().toString(36).substring(2, 15);
   }
 }
