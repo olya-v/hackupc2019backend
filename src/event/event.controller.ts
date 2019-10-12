@@ -1,4 +1,4 @@
-import {Controller, Get} from '@nestjs/common';
+import {Body, Controller, Get, Post} from '@nestjs/common';
 import { EventService } from './event.service';
 
 @Controller('event')
@@ -8,5 +8,20 @@ export class EventController {
     @Get()
     getHello() {
         return this.eventService.getEvents();
+    }
+
+    @Post('/create')
+    createEvent(@Body() data) {
+        this.eventService.createEvent(data);
+    }
+
+    @Post('/delete')
+    deleteEvent(@Body() data) {
+        this.eventService.deleteEvent(data);
+    }
+
+    @Post('/complete')
+    completeEvent(@Body() data) {
+        this.eventService.completeEvent(data);
     }
 }
