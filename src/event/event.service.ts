@@ -76,10 +76,15 @@ export class EventService {
         const completionImage = data.completionImage;
         event.addParticipant(participant, completed, completionImage);
         this.eventMap.set(eventId, event);
-        const userEvents = this.userService.getUser(participant).getUserEvents();
+        const user = this.userService.getUser(participant);
+        const userEvents = user.getUserEvents();
         if (userEvents.get(eventId) !== completed) {
             userEvents.set(eventId, completed);
+            if (completed) {
+                this.userService.updateExperience(participant);
+            }
         }
+
     }
 
     createFakeEvent() {

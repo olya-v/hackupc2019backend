@@ -12,14 +12,18 @@ export class UserController {
 
     @Get()
     getUser(@Body() data) {
-        const user = this.userService.getUser(data.userId);
-        return this.userService.getUser(user.getId());
+        return this.userService.getUser(data.getId());
     }
 
     @Get()
     getUserByName(@Body() data) {
-        const user = this.userService.getUserByName(data.username);
-        return user;
+        return this.userService.getUserByName(data.username);
+    }
+
+    @Get()
+    getUserExperience(@Body() data) {
+        const user = this.userService.getUser(data.getId());
+        return user.getExperience();
     }
 
     @Get()
@@ -59,5 +63,10 @@ export class UserController {
     @Post('/changeEvent')
     changeEventStatus(@Body() data) {
         this.userService.changeEventStatus(data.userId, data.eventId, data.completed);
+    }
+
+    @Post('/coinTransaction')
+    coinTransaction(@Body() data) {
+        this.userService.coinTransaction(data.userId, data.coins);
     }
 }

@@ -68,4 +68,36 @@ export class UserService {
             this.userMap.delete(userId);
         }
     }
+
+    coinTransaction(userId: string, coins: number): boolean {
+        const user = this.getUser(userId);
+        const oldCoins: number = user.getCoins();
+        const newCoins: number = oldCoins + coins;
+        if (newCoins < 0) {
+            user.setCoins(newCoins);
+            return true;
+        }
+        return false;
+    }
+
+    updateExperience(userId: string) {
+        const user = this.getUser(userId);
+        let completed: number = 0;
+        const events = Array.from(user.getUserEvents().values());
+        let k: number = 0;
+        for (k < this.users.length; k++;) {
+            if (events[k]) {
+                completed ++;
+            }
+        }
+        let i: number = 1;
+        let curr: number = 0;
+        let experience: number = 0;
+        while (i * 2 + curr <= completed) {
+            i++;
+            curr += i * 2;
+            experience += 10;
+        }
+        user.setExperience(experience);
+    }
 }
