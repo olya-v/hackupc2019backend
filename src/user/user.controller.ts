@@ -27,6 +27,16 @@ export class UserController {
     }
 
     @Get()
+    getUserExperienceProLevel(@Body() data) {
+        return this.userService.calculateExperienceProLevel(data.getId());
+    }
+
+    @Get()
+    getUserLevel(@Body() data) {
+        return this.userService.calculateLevel(data.getId());
+    }
+
+    @Get()
     getUserEvents(@Body() data) {
         const user = this.userService.getUser(data.userId);
         return this.userService.getUser(user.getId()).getUserEvents();

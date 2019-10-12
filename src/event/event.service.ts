@@ -81,7 +81,7 @@ export class EventService {
         if (userEvents.get(eventId) !== completed) {
             userEvents.set(eventId, completed);
             if (completed) {
-                this.userService.updateExperience(participant);
+                this.userService.updateTotalExperience(participant, event.getCoins());
             }
         }
 

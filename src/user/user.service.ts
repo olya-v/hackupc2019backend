@@ -80,24 +80,38 @@ export class UserService {
         return false;
     }
 
-    updateExperience(userId: string) {
+    updateTotalExperience(userId: string, coins: number) {
         const user = this.getUser(userId);
-        let completed: number = 0;
-        const events = Array.from(user.getUserEvents().values());
-        let k: number = 0;
-        for (k < this.users.length; k++;) {
-            if (events[k]) {
-                completed ++;
-            }
-        }
+        const experience = user.getExperience();
+        user.setExperience(experience + coins);
+    }
+
+    calculateExperienceProLevel(userId: string): number {
+        const user = this.getUser(userId);
+        let experience = user.getExperience();
+        const level = this.calculateLevel(userId);
         let i: number = 1;
         let curr: number = 0;
-        let experience: number = 0;
-        while (i * 2 + curr <= completed) {
+        while (i <= level) {
             i++;
-            curr += i * 2;
-            experience += 10;
+            curr += i;
         }
-        user.setExperience(experience);
+        experience = experience - curr;
+        return experience;
+    }
+
+    calculateLevel(userId: string): number {
+        const user = this.getUser(userId);
+        const experience = user.getExperience();
+        let i: number = 1;
+        const step: number = 5;
+        let curr: number = 0;
+        let level: number = 0;
+        while (i * step + curr <= experience) {
+            i++;
+            curr += i * step;
+            level += 1;
+        }
+        return level;
     }
 }
