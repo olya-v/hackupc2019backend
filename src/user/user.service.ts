@@ -69,4 +69,50 @@ export class UserService {
             this.userMap.delete(userId);
         }
     }
+
+    coinTransaction(userId: string, coins: number): boolean {
+        const user = this.getUser(userId);
+        const oldCoins: number = user.getCoins();
+        const newCoins: number = oldCoins + coins;
+        if (newCoins < 0) {
+            user.setCoins(newCoins);
+            return true;
+        }
+        return false;
+    }
+
+    updateTotalExperience(userId: string, coins: number) {
+        const user = this.getUser(userId);
+        const experience = user.getExperience();
+        user.setExperience(experience + coins);
+    }
+
+    calculateExperienceProLevel(userId: string): number {
+        const user = this.getUser(userId);
+        let experience = user.getExperience();
+        const level = this.calculateLevel(userId);
+        let i: number = 1;
+        let curr: number = 0;
+        while (i <= level) {
+            i++;
+            curr += i;
+        }
+        experience = experience - curr;
+        return experience;
+    }
+
+    calculateLevel(userId: string): number {
+        const user = this.getUser(userId);
+        const experience = user.getExperience();
+        let i: number = 1;
+        const step: number = 5;
+        let curr: number = 0;
+        let level: number = 0;
+        while (i * step + curr <= experience) {
+            i++;
+            curr += i * step;
+            level += 1;
+        }
+        return level;
+    }
 }

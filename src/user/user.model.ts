@@ -5,6 +5,7 @@ export class User {
     coins: number;
     icon: string = '';
     userEvents: Map<string, boolean> = new Map();
+    experience: number = 0;
 
     constructor(username: string,
                 isModerator: boolean,
@@ -73,5 +74,13 @@ export class User {
 
     getUserEvents(): Map<string, boolean> {
         return this.userEvents;
+    }
+
+    setExperience(experience: number) {
+        this.experience = experience;
+    }
+
+    getExperience(): number {
+        return this.experience;
     }
 }
