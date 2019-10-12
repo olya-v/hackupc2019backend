@@ -6,6 +6,13 @@ import { UserService } from '../user/user.service';
 export class EventService {
   constructor(private readonly userService: UserService) {
     this.createFakeEvent();
+    this.createFakeEvent();
+    this.createFakeEvent();
+    this.createFakeEvent();
+    this.createFakeEvent();
+    this.createFakeEvent();
+    this.createFakeEvent();
+    this.createFakeEvent();
   }
 
     eventMap: Map<string, Event> = new Map();
@@ -81,7 +88,7 @@ export class EventService {
           'just some stuff',
           20,
           Date.now(),
-          '',
+          'https://media.giphy.com/media/g5SW7jjVccIMM/giphy.gif',
           2,
           {long: 150, lang: 150, location: 'park'},
       );

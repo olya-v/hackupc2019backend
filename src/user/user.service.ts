@@ -24,7 +24,7 @@ export class UserService {
     }
 
     getAllUsers(): any[] {
-        return Array.from(this.userMap.entries());
+        return Array.from(this.userMap.values());
     }
 
     createUser(user) {
