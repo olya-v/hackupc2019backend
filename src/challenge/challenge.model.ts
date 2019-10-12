@@ -17,8 +17,6 @@ export class Challenge {
                 description: string,
                 image: string,
                 creator: number,
-                approved: boolean,
-                completed: boolean,
                 isProofReqired: boolean,
                 completionImage: string,
                 ) {
@@ -29,7 +27,6 @@ export class Challenge {
         this.description = description;
         this.image = image;
         this.creator = creator;
-        this.approved = approved;
         this.isProofRequired = isProofReqired;
         this.completionImage = completionImage;
     }

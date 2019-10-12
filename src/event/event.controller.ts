@@ -6,7 +6,7 @@ export class EventController {
     constructor(private readonly eventService: EventService) {}
 
     @Get()
-    getHello() {
+    getEvent() {
         return this.eventService.getEvents();
     }
 
@@ -23,5 +23,15 @@ export class EventController {
     @Post('/complete')
     completeEvent(@Body() data) {
         this.eventService.completeEvent(data);
+    }
+
+    @Post('/approve')
+    approveEvent(@Body() data) {
+        this.eventService.approveEvent(data);
+    }
+
+    @Post('/changeParticipantStatus')
+    changeParticipantStatus(@Body() data) {
+        this.eventService.changeParticipantStatus(data);
     }
 }
