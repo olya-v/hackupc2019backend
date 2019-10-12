@@ -62,4 +62,8 @@ export class User {
             this.userEvents.push(eventId);
         }
     }
+
+    getUserEvents(): any[] {
+        return this.userEvents;
+    }
 }

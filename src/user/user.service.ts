@@ -38,5 +38,8 @@ export class UserService {
         this.userMap.set(newUser.getId(), newUser);
     }
 
+    addEventToUser(userId: string, eventId: string) {
+        this.getUser(userId).addEvent(eventId);
+    }
 
 }
