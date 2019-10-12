@@ -21,7 +21,7 @@ export class UserService {
         return this.userMap.get(userId);
     }
 
-    getUsers(): any[] {
+    getAllUsers(): any[] {
         return Array.from(this.userMap.entries());
     }
 
@@ -40,5 +40,15 @@ export class UserService {
 
     addEventToUser(userId: string, eventId: string) {
         this.getUser(userId).addEvent(eventId);
+    }
+
+    changeModeratorState(userId: string, isModerator: boolean) {
+        this.getUser(userId).setIsModerator(isModerator);
+    }
+
+    deleteUser(userId: string) {
+        if (this.userMap.has(userId)) {
+            this.userMap.delete(userId);
+        }
     }
 }
