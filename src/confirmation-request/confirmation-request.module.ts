@@ -4,6 +4,6 @@ import { ConfirmationRequestController } from './confirmation-request.controller
 
 @Module({
   providers: [ConfirmationRequestService],
-  controllers: [ConfirmationRequestController]
+  controllers: [ConfirmationRequestController],
 })
 export class ConfirmationRequestModule {}

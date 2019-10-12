@@ -1,6 +1,6 @@
 import {Controller, Get, Post, Body} from '@nestjs/common';
-import { ConfirmationRequestService } from "./confirmation-request.service";
-import { UserService } from "../user/user.service";
+import { ConfirmationRequestService } from './confirmation-request.service';
+import { UserService } from '../user/user.service';
 
 @Controller('confirmation-request')
 export class ConfirmationRequestController {
@@ -16,7 +16,7 @@ export class ConfirmationRequestController {
   getConfirmationRequestsToReview(@Body() data) {
     const user = this.userService.getUser(data.userId);
     if (!user || !user.isModerator) {
-      return 'User is not allowed get requests to review'
+      return 'User is not allowed get requests to review';
     }
     return this.confirmationRequestService.getConfirmationRequests();
   }
