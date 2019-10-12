@@ -105,7 +105,7 @@ export class Event {
 
     addParticipant(userId: string, completed: boolean, completionImage: string) {
         if (!this.participantIds.has(userId)) {
-          const details = {completed, completionImage};
+          const details = {userId, completed, completionImage};
           this.participantIds.set(userId, details);
         }
     }

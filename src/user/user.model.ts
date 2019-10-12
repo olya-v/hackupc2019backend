@@ -9,9 +9,16 @@ export class User {
     constructor(username: string,
                 isModerator: boolean,
                 coins: number,
-                icon: string) {
+                icon: string,
+                id: string = '') {
         this.username = username;
-        this.setId();
+        if (id === '') {
+            console.log('no id given');
+            this.setId();
+        } else {
+            console.log('in else user');
+            this.id = id;
+        }
         this.isModerator = isModerator;
         this.coins = coins;
         this.icon = icon;

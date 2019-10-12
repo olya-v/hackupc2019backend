@@ -7,7 +7,8 @@ export class EventController {
 
     @Get()
     getEvent() {
-        return this.eventService.getEvents();
+        const events = this.eventService.getEvents();
+        return events.map(event => ({...event, participantIds: Array.from(event.participantIds.values())}));
     }
 
     @Post('/create')
@@ -38,6 +39,7 @@ export class EventController {
     @Post('/participate')
     participateInEvent(@Body() data) {
         this.eventService.addParticipant(data);
+        return this.eventService.getEventById(data.userId);
     }
 
     @Post('/changeParticipantStatus')

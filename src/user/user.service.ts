@@ -44,6 +44,7 @@ export class UserService {
             user.isModerator,
             user.coins,
             user.icon,
+            user.id,
         );
         while (this.userMap.has(newUser.getId())) {
             newUser.setId();
