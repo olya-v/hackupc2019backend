@@ -16,6 +16,18 @@ export class UserController {
         return this.userService.getUser(user.getId());
     }
 
+    @Get()
+    getUserByName(@Body() data) {
+        const user = this.userService.getUserByName(data.username);
+        return user;
+    }
+
+    @Get()
+    getUserEvents(@Body() data) {
+        const user = this.userService.getUser(data.userId);
+        return this.userService.getUser(user.getId()).getUserEvents();
+    }
+
     @Post('/create')
     createUser(@Body() data) {
         this.userService.createUser(data);
@@ -39,8 +51,13 @@ export class UserController {
         this.userService.changeModeratorState(user.id, false);
     }
 
-    @Post('/become')
+    @Post('/addEvent')
     addEventToUser(@Body() data) {
         this.userService.addEventToUser(data.userId, data.eventId);
+    }
+
+    @Post('/changeEvent')
+    changeEventStatus(@Body() data) {
+        this.userService.changeEventStatus(data.userId, data.eventId, data.completed);
     }
 }
