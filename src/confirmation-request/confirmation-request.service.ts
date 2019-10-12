@@ -20,7 +20,7 @@ export class ConfirmationRequestService {
   createConfirmationRequest(data): void {
     const { userId, eventId, confirmationImage } = data;
     const newConfirmationRequest = new ConfirmationRequest(userId, eventId, confirmationImage);
-    while (this.confirmationRequests.find((request) => { request.id === newConfirmationRequest.id; }) !== 'undefined') {
+    while (this.confirmationRequests.find((request) => request.id === newConfirmationRequest.id) !== 'undefined') {
       newConfirmationRequest.setId();
     }
     this.confirmationRequests.push(newConfirmationRequest);
