@@ -72,10 +72,13 @@ export class EventService {
 
     addParticipant(data) {
         const eventId = data.eventId;
-        const event = this.eventMap.get(eventId);
-        const participant = data.userId;
-        event.addParticipant(participant, false, '');
-        this.eventMap.set(eventId, event);
+        if (this.eventMap.has(eventId)) {
+            const event = this.eventMap.get(eventId);
+            const participant = data.userId;
+            event.addParticipant(participant, false, '');
+            this.eventMap.set(eventId, event);
+            this.userService.getUser(participant).addEvent(eventId, false);
+        }
     }
 
     changeParticipantStatus(data) {
@@ -86,6 +89,10 @@ export class EventService {
         const completionImage = data.completionImage;
         event.addParticipant(participant, completed, completionImage);
         this.eventMap.set(eventId, event);
+        const userEvents = this.userService.getUser(participant).getUserEvents();
+        if (userEvents.get(eventId) !== completed) {
+            userEvents.set(eventId, completed);
+        }
     }
 
     createFakeEvent() {

@@ -35,6 +35,11 @@ export class EventController {
         this.eventService.approveEvent(data);
     }
 
+    @Post('/participate')
+    participateInEvent(@Body() data) {
+        this.eventService.addParticipant(data);
+    }
+
     @Post('/changeParticipantStatus')
     changeParticipantStatus(@Body() data) {
         this.eventService.changeParticipantStatus(data);

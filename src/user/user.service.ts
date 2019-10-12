@@ -23,6 +23,17 @@ export class UserService {
         }
     }
 
+    getUserByName(username: string): any {
+        const users = Array.from(this.userMap.values());
+        let i: number = 0;
+        for (i < this.users.length; i++;) {
+
+            if (users[i].getUsername().match(username)) {
+                return users[i];
+            }
+        }
+    }
+
     getAllUsers(): any[] {
         return Array.from(this.userMap.values());
     }
