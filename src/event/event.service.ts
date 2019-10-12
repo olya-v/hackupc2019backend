@@ -44,7 +44,6 @@ export class EventService {
           event.image,
           event.creator,
           event.location,
-          [],
       );
       while (this.eventMap.has(newEvent.id)) {
         newEvent.setId();
@@ -60,8 +59,33 @@ export class EventService {
     completeEvent(data) {
       const eventId = data.eventId;
       const event = this.eventMap.get(eventId);
-      event.completed = true;
+      event.setCompleted(true);
       this.eventMap.set(eventId, event);
+    }
+
+    approveEvent(data) {
+        const eventId = data.eventId;
+        const event = this.eventMap.get(eventId);
+        event.setApproved(true);
+        this.eventMap.set(eventId, event);
+    }
+
+    addParticipant(data) {
+        const eventId = data.eventId;
+        const event = this.eventMap.get(eventId);
+        const participant = data.userId;
+        event.addParticipant(participant, false, '');
+        this.eventMap.set(eventId, event);
+    }
+
+    changeParticipantStatus(data) {
+        const eventId = data.eventId;
+        const event = this.eventMap.get(eventId);
+        const participant = data.userId;
+        const completed = data.completed;
+        const completionImage = data.completionImage;
+        event.addParticipant(participant, completed, completionImage);
+        this.eventMap.set(eventId, event);
     }
 
     createFakeEvent() {
@@ -79,16 +103,12 @@ export class EventService {
           Date.now(),
           'https://media.giphy.com/media/g5SW7jjVccIMM/giphy.gif',
           2,
-          {long: 150, lang: 150},
-          [{
-            id: user.id,
-            completed: false,
-            completedImage: '',
-          }],
+          {long: 150, lang: 150, location: 'park'},
       );
       while (this.eventMap.has(fakeEvent.id)) {
         fakeEvent.setId();
       }
+      fakeEvent.addParticipant(user.id, false, '');
       this.eventMap.set(fakeEvent.id, fakeEvent);
     }
 }

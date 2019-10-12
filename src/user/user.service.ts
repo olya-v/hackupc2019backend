@@ -18,7 +18,9 @@ export class UserService {
     userMap: Map<string, User> = new Map();
 
     getUser(userId: string): User {
-        return this.userMap.get(userId);
+        if (this.userMap.has(userId)) {
+            return this.userMap.get(userId);
+        }
     }
 
     getAllUsers(): any[] {
@@ -39,7 +41,11 @@ export class UserService {
     }
 
     addEventToUser(userId: string, eventId: string) {
-        this.getUser(userId).addEvent(eventId);
+        this.getUser(userId).addEvent(eventId, false);
+    }
+
+    changeEventStatus(userId: string, eventId: string, completed: boolean) {
+        this.getUser(userId).getUserEvents().set(eventId, completed);
     }
 
     changeModeratorState(userId: string, isModerator: boolean) {

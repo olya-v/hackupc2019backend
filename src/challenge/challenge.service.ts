@@ -17,8 +17,6 @@ export class ChallengeService {
             challenge.description,
             challenge.image,
             challenge.creator,
-            challenge.approved,
-            challenge.completed,
             challenge.isProofRequired,
             challenge.completionImage,
         );

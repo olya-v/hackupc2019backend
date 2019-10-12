@@ -8,7 +8,7 @@ export class Event {
   image: string;
   creator: number;
   location: object;
-  participantIds: object[];
+  participantIds: Map<string, object> = new Map();
   approved: boolean = false;
   completed: boolean = false;
   completionImage: string = '';
@@ -20,8 +20,7 @@ export class Event {
               utcTimestamp: number,
               image: string,
               creator: number,
-              location: object,
-              participantIds: object[]) {
+              location: object) {
     this.setId();
     this.title = title;
     this.estimatedWorkHours = estimatedWorkHours;
@@ -30,7 +29,6 @@ export class Event {
     this.image = image;
     this.creator = creator;
     this.location = location;
-    this.participantIds = participantIds;
   }
 
   setId() {
@@ -91,6 +89,32 @@ export class Event {
 
     setCreator(creator: number) {
         this.creator = creator;
+    }
+
+    getLocation(): object {
+        return this.location;
+    }
+
+    setLocation(location: object) {
+        this.location = location;
+    }
+
+    getParticipants(): any[] {
+        return Array.from(this.participantIds.values());
+    }
+
+    addParticipant(userId: string, completed: boolean, completionImage: string) {
+        if (!this.participantIds.has(userId)) {
+          const details = {completed, completionImage};
+          this.participantIds.set(userId, details);
+        }
+    }
+
+    changeParticipantStatus(userId: string, completed: boolean, completionImage: string) {
+        if (this.participantIds.has(userId)) {
+            const details = {completed, completionImage};
+            this.participantIds.set(userId, details);
+        }
     }
 
     getApproved(): boolean {

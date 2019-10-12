@@ -4,7 +4,7 @@ export class User {
     isModerator: boolean;
     coins: number;
     icon: string = '';
-    userEvents: string[] = new Array<string>();
+    userEvents: Map<string, boolean> = new Map();
 
     constructor(username: string,
                 isModerator: boolean,
@@ -57,13 +57,14 @@ export class User {
         this.icon = icon;
     }
 
-    addEvent(eventId: string) {
-        if (!this.userEvents.includes(eventId)) {
-            this.userEvents.push(eventId);
+    addEvent(eventId: string, completed: boolean) {
+        if (!this.userEvents.has(eventId)) {
+
+            this.userEvents.set(eventId, completed);
         }
     }
 
-    getUserEvents(): any[] {
+    getUserEvents(): Map<string, boolean> {
         return this.userEvents;
     }
 }
