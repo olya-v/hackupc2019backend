@@ -12,7 +12,7 @@ export class EventService {
       2,
       {long: 150, lang: 150},
       [{
-        id: 1,
+        id: 'hfeksnteklsfneksl',
         completed: false,
         completedImage: '',
       }],

@@ -5,6 +5,10 @@ import { ConfirmationRequest} from "./confirmationRequest.model";
 export class ConfirmationRequestService {
   confirmationRequests = [];
 
+  getConfirmationRequestById(id) {
+    return this.confirmationRequests.find((request) => { return request.id === id})
+  }
+
   getConfirmationRequests(): any[] {
     return this.confirmationRequests;
   }
@@ -13,12 +17,24 @@ export class ConfirmationRequestService {
     return this.confirmationRequests.filter((request) => { return request.confirmed === true });
   }
 
-  addConfirmationRequest(userId, eventId, confirmationImage): void {
+  createConfirmationRequest(data): void {
+    const { userId, eventId, confirmationImage } = data;
     const newConfirmationRequest = new ConfirmationRequest(userId, eventId, confirmationImage);
+    while (this.confirmationRequests.find((request) => { request.id === newConfirmationRequest.id }) !== 'undefined') {
+      newConfirmationRequest.setId();
+    }
     this.confirmationRequests.push(newConfirmationRequest);
   }
 
   getConfirmationRequestsForUser(data) {
     return data.userId ? this.confirmationRequests.filter((request) => { return request.userId === data.userId}) : 'No requests for that user';
+  }
+
+  evaluateConfirmationRequest(data) {
+    const { confirmationRequestId, accepted } = data;
+    const request = this.getConfirmationRequestById(confirmationRequestId);
+    if (request) {
+      request.confirmed = accepted;
+    }
   }
 }
