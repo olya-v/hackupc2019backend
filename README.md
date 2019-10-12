@@ -73,3 +73,16 @@ Nest is an MIT-licensed open source project. It can grow thanks to the sponsors 
 ## License
 
   Nest is [MIT licensed](LICENSE).
+  
+## About the Project: 
+### Daily personal challenges:
+These challenges are daily or weekly todos for every user
+- Do not eat meat for a day
+- Buy recycled products
+- Go shopping with a bag of cloth
+- Do not use your car
+
+### Social events
+These events are organized by moderators or cities
+- Meet up to clean beaches/parks/streets
+- 

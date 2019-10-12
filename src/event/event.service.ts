@@ -1,26 +1,17 @@
 import { Injectable } from '@nestjs/common';
 import { Event } from './event.model';
+import { UserService } from '../user/user.service';
 
 @Injectable()
 export class EventService {
-    fakeEvent = new Event(
-      'park aufräumen',
-      1,
-      20,
-      Date.now(),
-      '',
-      2,
-      {long: 150, lang: 150},
-      [{
-        id: 'hfeksnteklsfneksl',
-        completed: false,
-        completedImage: '',
-      }],
-    );
+  constructor(private readonly userService: UserService) {
+    this.createFakeEvent();
+  }
+
     eventMap: Map<string, Event> = new Map();
 
     getEvents(): any[] {
-        return Array.from(this.eventMap.entries());
+        return Array.from(this.eventMap.values());
     }
 
     createEvent(event) {
@@ -50,5 +41,32 @@ export class EventService {
       const event = this.eventMap.get(eventId);
       event.completed = true;
       this.eventMap.set(eventId, event);
+    }
+
+    createFakeEvent() {
+      let users = this.userService.getAllUsers();
+      if (users.length === 0) {
+        this.userService.createUser({username: 'Susi', isModerator: false, coins: 0, icon: ''});
+        users = this.userService.getAllUsers();
+      }
+      const user = users[Math.floor(Math.random() * users.length)];
+      const fakeEvent = new Event(
+          'Park aufräumen',
+          1,
+          20,
+          Date.now(),
+          '',
+          2,
+          {long: 150, lang: 150},
+          [{
+            id: user.id,
+            completed: false,
+            completedImage: '',
+          }],
+      );
+      while (this.eventMap.has(fakeEvent.id)) {
+        fakeEvent.setId();
+      }
+      this.eventMap.set(fakeEvent.id, fakeEvent);
     }
 }
