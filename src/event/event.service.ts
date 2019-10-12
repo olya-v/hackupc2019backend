@@ -21,10 +21,24 @@ export class EventService {
         return Array.from(this.eventMap.values());
     }
 
+    getEventsOfXDays(days): any[] {
+        const daysInSeconds = days * (24 * 60 * 60);
+        let events = Array.from(this.eventMap.values());
+        const now = Date.now();
+        const limit = now + daysInSeconds;
+        if (days >= 0) {
+          events = events.filter((event) => event.getUtcTimestamp() > now && event.getUtcTimestamp() < limit)
+        } else {
+          events = events.filter((event) => event.getUtcTimestamp() < now && event.getUtcTimestamp() > limit)
+        }
+        return events;
+    }
+
     createEvent(event) {
       const newEvent = new Event(
           event.title,
           event.estimatedWorkHours,
+          event.description,
           event.coins,
           event.utcTimestamp,
           event.image,
@@ -60,6 +74,7 @@ export class EventService {
       const fakeEvent = new Event(
           'Park aufräumen',
           1,
+          'Da liegt Müll rum',
           20,
           Date.now(),
           'https://media.giphy.com/media/g5SW7jjVccIMM/giphy.gif',

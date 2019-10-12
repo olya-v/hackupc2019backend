@@ -24,4 +24,9 @@ export class EventController {
     completeEvent(@Body() data) {
         this.eventService.completeEvent(data);
     }
+
+    @Post('/get-events-for-x-days')
+    getEventsForXDays(@Body() data) {
+        this.eventService.getEventsOfXDays(data);
+    }
 }
