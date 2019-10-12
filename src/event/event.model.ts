@@ -2,17 +2,20 @@ export class Event {
   id: string;
   title: string;
   estimatedWorkHours: number;
+  description: string;
   coins: number;
   utcTimestamp: number;
   image: string;
   creator: number;
   location: object;
   participantIds: object[];
+  approved: boolean = false;
   completed: boolean = false;
   completionImage: string = '';
 
   constructor(title: string,
               estimatedWorkHours: number,
+              description: string,
               coins: number,
               utcTimestamp: number,
               image: string,
@@ -33,4 +36,84 @@ export class Event {
   setId() {
     this.id = Math.random().toString(36).substring(2, 15) + Math.random().toString(36).substring(2, 15);
   }
+
+    getTitle(): string {
+        return this.title;
+    }
+
+    setTitle(title: string) {
+        this.title = title;
+    }
+
+    getEstimatedWorkHours(): number {
+        return this.estimatedWorkHours;
+    }
+
+    setEstimatedWorkHours(estimatedWorkHours: number) {
+        this.estimatedWorkHours = estimatedWorkHours;
+    }
+
+    getDescription(): string {
+        return this.description;
+    }
+
+    setDescription(description: string) {
+        this.description = description;
+    }
+
+    getCoins(): number {
+        return this.coins;
+    }
+
+    setCoins(coins: number) {
+        this.coins = coins;
+    }
+
+    getUtcTimestamp(): number {
+        return this.utcTimestamp;
+    }
+
+    setUtcTimestamp(utcTimestamp: number) {
+        this.utcTimestamp = utcTimestamp;
+    }
+
+    getImage(): string {
+        return this.image;
+    }
+
+    setImage(image: string) {
+        this.image = image;
+    }
+
+    getCreator(): number {
+        return this.creator;
+    }
+
+    setCreator(creator: number) {
+        this.creator = creator;
+    }
+
+    getApproved(): boolean {
+        return this.approved;
+    }
+
+    setApproved(approved: boolean) {
+        this.approved = approved;
+    }
+
+    getCompleted(): boolean {
+        return this.completed;
+    }
+
+    setCompleted(completed: boolean) {
+        this.completed = completed;
+    }
+
+    getCompletionImage(): string {
+        return this.completionImage;
+    }
+
+    setCompletionImage(completionImage: string) {
+        this.completionImage = completionImage;
+    }
 }
