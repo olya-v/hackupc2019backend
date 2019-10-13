@@ -1,4 +1,4 @@
-import {Body, Param, Controller, Get, Post} from '@nestjs/common';
+import {Body, Controller, Get, Post, Param} from '@nestjs/common';
 import {UserService} from './user.service';
 
 @Controller('user')
@@ -7,41 +7,37 @@ export class UserController {
 
     @Get()
     getAllUsers() {
-        console.log('get all users');
         return this.userService.getAllUsers();
     }
 
-    @Get(':id')
-    getUser(@Param('id') id) {
-        console.log('get user', id);
-        console.log(this.userService.getUser(id));
-
-        return this.userService.getUser(id);
-    }
+  @Get(':id')
+  getUser(@Param('id') id) {
+    return this.userService.getUser(id);
+  }
 
     @Get(':name')
-    getUserByName(@Param() name) {
+    getUserByName(@Param('name') name) {
         return this.userService.getUserByName(name);
     }
 
     @Get(':userId')
-    getUserExperience(@Param() userId) {
+    getUserExperience(@Param('userId') userId) {
         const user = this.userService.getUser(userId);
         return user.getExperience();
     }
 
     @Get(':userId')
-    getUserExperienceProLevel(@Param() userId) {
+    getUserExperienceProLevel(@Param('userId') userId) {
         return this.userService.calculateExperienceProLevel(userId);
     }
 
     @Get(':userId')
-    getUserLevel(@Param() userId) {
+    getUserLevel(@Param('userId') userId) {
         return this.userService.calculateLevel(userId);
     }
 
     @Get(':userId')
-    getUserEvents(@Param() userId) {
+    getUserEvents(@Param('userId') userId) {
         const user = this.userService.getUser(userId);
         return this.userService.getUser(user.getId()).getUserEvents();
     }
