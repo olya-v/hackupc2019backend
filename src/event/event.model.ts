@@ -23,6 +23,7 @@ export class Event {
               location: object) {
     this.setId();
     this.title = title;
+    this.description = description;
     this.estimatedWorkHours = estimatedWorkHours;
     this.coins = coins;
     this.utcTimestamp = utcTimestamp;

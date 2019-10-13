@@ -119,6 +119,7 @@ export class EventService {
         fakeEvent.addParticipant(user.id, false, '');
         this.eventMap.set(fakeEvent.id, fakeEvent);
       }
+      console.log(users);
     }
 
     getFakeEvent(user, index) {
